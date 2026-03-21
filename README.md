@@ -19,9 +19,10 @@ To run this project on your local machine, you will need:
 ## 📁 Project Structure
 
 Currently, the project is organized into lessons:
-- **[lesson-01/](./lesson-01/)**: Basic HTML Forms & PHP Grading Logic. 
-  - `index.html`: The frontend form.
-  - `process.php`: The backend logic for grading.
+- **[lesson-01/](./lesson-01/)**: Basic HTML Forms & PHP Grading Logic.
+- **[lesson-02/](./lesson-02/)**: Multi-Subject Grading (Arrays & Loops).
+  - `index.html`: Form for multiple subjects/marks.
+  - `process.php`: Calculates individual grades, total, and average score.
 
 ---
 

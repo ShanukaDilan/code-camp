@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+    WHAT: Multi-subject HTML input form.
+    WHY: To allow entering multiple subject marks at once, moving from single variables to handling lists of data.
+    HOW: Using array-like names (e.g., name="subjects[]") so PHP receives them as an array.
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 02 - Multi-Subject Grading System</title>
+    <style>
+        /* 
+            WHAT: UI Styling with a focus on form layout.
+            WHY: To organize multiple inputs neatly and maintain a consistent look.
+            HOW: Using grid-like spacing for labels and inputs.
+        */
+        body { font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; background-color: #f0f2f5; padding: 40px; color: #333; }
+        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); max-width: 500px; margin: auto; }
+        h2 { text-align: center; color: #1a73e8; margin-bottom: 25px; }
+        h3 { font-size: 1rem; color: #555; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 20px; }
+        
+        .form-row { display: flex; gap: 10px; margin-bottom: 15px; }
+        .form-group { flex: 1; }
+        
+        label { font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.9rem; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; transition: 0.3s; }
+        input:focus { border-color: #1a73e8; outline: none; box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1); }
+
+        button { width: 100%; padding: 14px; background-color: #1a73e8; color: white; border: none; border-radius: 6px; margin-top: 25px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: background 0.3s; }
+        button:hover { background-color: #1557b0; }
+
+        .footer { text-align: center; margin-top: 20px; font-size: 0.85rem; color: #777; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Report Card</h2>
+    
+    <form action="process.php" method="POST">
+        <!-- 
+            WHAT: Student Identity Input.
+            WHY: Every report needs a name!
+        -->
+        <label for="student_name">Student Name:</label>
+        <input type="text" id="student_name" name="student_name" placeholder="John Doe" required>
+
+        <h3>Subject Details & Marks</h3>
+        
+        <!-- 
+            WHAT: Multiple Rows for Subjects.
+            WHY: To teach students how to pass multiple related values to the backend.
+            HOW: We use name="subjects[]" and name="marks[]". The square brackets [] are critical! 
+                 In PHP, these will arrive as indexed arrays.
+        -->
+        
+        <!-- Subject 1 -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Subject 1</label>
+                <input type="text" name="subjects[]" placeholder="Mathematics" required>
+            </div>
+            <div class="form-group" style="flex: 0 0 100px;">
+                <label>Mark</label>
+                <input type="number" name="marks[]" min="0" max="100" placeholder="0-100" required>
+            </div>
+        </div>
+
+        <!-- Subject 2 -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Subject 2</label>
+                <input type="text" name="subjects[]" placeholder="Science" required>
+            </div>
+            <div class="form-group" style="flex: 0 0 100px;">
+                <label>Mark</label>
+                <input type="number" name="marks[]" min="0" max="100" placeholder="0-100" required>
+            </div>
+        </div>
+
+        <!-- Subject 3 -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Subject 3</label>
+                <input type="text" name="subjects[]" placeholder="English" required>
+            </div>
+            <div class="form-group" style="flex: 0 0 100px;">
+                <label>Mark</label>
+                <input type="number" name="marks[]" min="0" max="100" placeholder="0-100" required>
+            </div>
+        </div>
+
+        <button type="submit">Generate Report</button>
+    </form>
+    
+    <div class="footer">
+        Lesson 02: Introduction to Arrays & Multi-Input Handling
+    </div>
+</div>
+
+</body>
+</html>
