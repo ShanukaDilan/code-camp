@@ -1,33 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- 
+    WHAT: A basic HTML document structure with internal CSS for a Student Grading System.
+    WHY: This provides a clean, user-friendly interface for students or teachers to input marks.
+    HOW: We use standard HTML tags like <form> for data collection and <style> for simple layout and colors.
+-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lesson 01 - Student Grading System</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 50px; }
-        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        /* 
+            WHAT: CSS Styling 
+            WHY: To make the form look modern and readable (UI/UX).
+            HOW: Using flexbox-like centering (background color, box shadows, and border-radius).
+        */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; padding: 50px; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
         h2 { text-align: center; color: #333; }
-        label { font-weight: bold; display: block; margin-top: 10px; }
-        input[type="text"], input[type="number"] { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px; margin-top: 15px; cursor: pointer; }
+        label { font-weight: bold; display: block; margin-top: 15px; color: #555; }
+        
+        /* Input styling for better focus */
+        input[type="text"], input[type="number"] { width: 100%; padding: 10px; margin-top: 5px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        input:focus { border-color: #28a745; outline: none; box-shadow: 0 0 5px rgba(40, 167, 69, 0.2); }
+
+        /* Button hover animation */
+        button { width: 100%; padding: 12px; background-color: #28a745; color: white; border: none; border-radius: 4px; margin-top: 20px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: background 0.3s ease; }
         button:hover { background-color: #218838; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Enter Student Marks</h2>
+    <h2>Student Marks</h2>
+    
+    <!-- 
+        WHAT: An HTML Form.
+        WHY: To collect user input and send it to the server for processing.
+        HOW: 
+            - 'action="process.php"': Tells the form where to send the data.
+            - 'method="POST"': Sends data securely in the background (not visible in the URL).
+    -->
     <form action="process.php" method="POST">
+        <!-- Input for Name -->
         <label for="student_name">Student Name:</label>
-        <input type="text" id="student_name" name="student_name" required>
+        <input type="text" id="student_name" name="student_name" placeholder="Enter full name" required>
 
+        <!-- Input for Subject -->
         <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" required>
+        <input type="text" id="subject" name="subject" placeholder="e.g. Mathematics" required>
 
+        <!-- Input for Marks -->
         <label for="mark">Mark (0 - 100):</label>
-        <input type="number" id="mark" name="mark" min="0" max="100" required>
+        <input type="number" id="mark" name="mark" min="0" max="100" placeholder="Enter score" required>
 
+        <!-- Submit Button -->
         <button type="submit">Calculate Grade</button>
     </form>
 </div>
