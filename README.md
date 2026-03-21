@@ -61,7 +61,7 @@ This creates a simple user interface with basic CSS for styling.
     </form>
 </div></body></html>
 ```
-**File 2: `process.php` (The Backend Logic)
+**File 2: `process.php` (The Backend Logic)**
 This script captures the form data, validates it according to your exact rules, and displays the result.
 ```<?php
 // Check if the form was actually submitted via POST
