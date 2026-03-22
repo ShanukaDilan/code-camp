@@ -16,18 +16,24 @@ To run this project on your local machine, you will need:
    ```bash
    git clone [https://github.com/ShanukaDilan/code-camp.git](https://github.com/ShanukaDilan/code-camp.git)
 
-## 📁 Project Structure
+# 🏕️ Code-Camp Project
+A step-by-step educational project for learning modern Web Development with PHP.
 
-Currently, the project is organized into lessons:
-- **[lesson-01/](./lesson-01/)**: Basic HTML Forms & PHP Grading Logic.
-- **[lesson-02/](./lesson-02/)**: Multi-Subject Grading (Arrays & Loops).
-- **[lesson-03/](./lesson-03/)**: Classroom Grading System (Nested Loops & Dynamic Forms).
-  - `index.html`: Dynamic form to add/remove multiple students.
-  - `process.php`: Nested loops to process results for an entire class.
-- **[lesson-04/](./lesson-04/)**: Modular Grading System (Functions & Includes).
-- **[lesson-05/](./lesson-05/)**: Classroom Ranking System (Sorting & Leaderboards).
-- **[lesson-06/](./lesson-06/)**: Interactive Revision Tutorial (Lessons 1-5).
-  - `index.html`: A slide-based "What, Why, How" review of all core concepts learned so far.
+---
+
+## 📂 Project Structure
+
+### 📦 [Chapter-01: Foundations & PHP Logic](./Chapter-01/)
+This chapter covers the basics of Web Forms, Data Processing, Arrays, and Functions.
+
+- **[lesson-01](./Chapter-01/lesson-01/)**: Basic HTML Forms & PHP Grading.
+- **[lesson-02](./Chapter-01/lesson-02/)**: Arrays & Loops for multiple subjects.
+- **[lesson-03](./Chapter-01/lesson-03/)**: Classroom processing with dynamic JavaScript.
+- **[lesson-04](./Chapter-01/lesson-04/)**: Modular code using PHP Functions.
+- **[lesson-05](./Chapter-01/lesson-05/)**: Sorting algorithms and ranking leaderboards.
+- **[Revision-01](./Chapter-01/Revision-01/)**: Interactive tutorial covering all concepts.
+
+---
 
 ---
 
