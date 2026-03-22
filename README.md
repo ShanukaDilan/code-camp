@@ -26,9 +26,8 @@ Currently, the project is organized into lessons:
   - `process.php`: Nested loops to process results for an entire class.
 - **[lesson-04/](./lesson-04/)**: Modular Grading System (Functions & Includes).
 - **[lesson-05/](./lesson-05/)**: Classroom Ranking System (Sorting & Leaderboards).
-  - `functions.php`: Includes the `rankStudents()` sorting algorithm.
-  - `index.html`: Input form for the entire classroom.
-  - `process.php`: Displays a ranked leaderboard (1st, 2nd, 3rd place).
+- **[lesson-06/](./lesson-06/)**: Interactive Revision Tutorial (Lessons 1-5).
+  - `index.html`: A slide-based "What, Why, How" review of all core concepts learned so far.
 
 ---
 

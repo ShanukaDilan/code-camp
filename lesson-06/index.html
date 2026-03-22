@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revise: Code Camp Lessons 1-5</title>
+    <!-- Google Fonts for premium look -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --accent: #34a853;
+            --what: #4c8bf5;
+            --why: #fbbc05;
+            --how: #34a853;
+            --bg: #f8f9fa;
+        }
+
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg); margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; overflow-x: hidden; }
+
+        .tutorial-container { width: 95%; max-width: 1000px; background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); position: relative; overflow: hidden; height: 85vh; display: flex; flex-direction: column; }
+
+        /* Progress Bar */
+        .progress-container { height: 8px; background: #eee; width: 100%; }
+        .progress-bar { height: 100%; background: var(--primary); transition: width 0.4s ease-out; width: 20%; }
+
+        /* Slides Header */
+        .tutorial-header { padding: 30px; background: white; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+        .tutorial-header h1 { margin: 0; font-size: 1.5rem; color: #333; }
+        .slide-counter { font-weight: 600; color: #777; font-size: 0.9rem; }
+
+        /* Slide Content Container */
+        .slides-wrapper { flex: 1; padding: 40px; overflow-y: auto; scroll-behavior: smooth; }
+        .slide { display: none; animation: slideIn 0.5s ease; width: 100%; }
+        .slide.active { display: block; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Question Box Style (What, Why, How) */
+        .box { border-radius: 12px; padding: 25px; margin-bottom: 25px; border-left: 8px solid; position: relative; }
+        .box h3 { margin-top: 0; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
+
+        .box-what { background: #e8f0fe; border-color: var(--what); color: #1967d2; }
+        .box-why { background: #fef7e0; border-color: var(--why); color: #b06000; }
+        .box-how { background: #e6f4ea; border-color: var(--how); color: #137333; }
+
+        code { background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 8px; display: block; overflow-x: auto; font-family: 'Consolas', monospace; font-size: 0.9rem; line-height: 1.5; margin-top: 10px; }
+
+        /* Footer Controls */
+        .tutorial-footer { padding: 25px 40px; background: #fff; border-top: 1px solid #f0f0f0; display: flex; justify-content: space-between; }
+        .btn { padding: 12px 30px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; transition: 0.2s; font-size: 1rem; }
+        .btn-prev { background: #f1f3f4; color: #5f6368; }
+        .btn-next { background: var(--primary); color: white; }
+        .btn:hover { transform: scale(1.03); opacity: 0.9; }
+        .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .icon-chip { background: var(--primary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 10px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+<div class="tutorial-container">
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="tutorial-header">
+        <h1>Revision: Lessons 01 - 05</h1>
+        <div class="slide-counter" id="counter">1 / 5</div>
+    </div>
+
+    <div class="slides-wrapper">
+        
+        <!-- SLIDE 1: PREAMBLE TO BASICS -->
+        <div class="slide active">
+            <span class="icon-chip">Lesson 01</span>
+            <h2>HTML Forms & Basic PHP</h2>
+            <div class="box box-what">
+                <h3>(WHAT) is it?</h3>
+                The very first step: Creating a UI for users to enter a student name and their mark, then processing it to find a Grade (A, B, C...).
+            </div>
+            <div class="box box-why">
+                <h3>(WHY) do we use it?</h3>
+                To learn how the web communicates. Every site (Facebook, Amazon) uses forms to take data and PHP (or similar) to make decisions.
+            </div>
+            <div class="box box-how">
+                <h3>(HOW) did we do it?</h3>
+                Used `$_POST` to catch data and `if-else` for decision making.
+                <code>&lt;?php <br> if ($mark >= 75) { echo "Grade A"; } <br> ?&gt;</code>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: ARRAYS -->
+        <div class="slide">
+            <span class="icon-chip">Lesson 02</span>
+            <h2>Loops & Multiple Subjects</h2>
+            <div class="box box-what">
+                <h3>(WHAT) is it?</h3>
+                Scaling up to handle multiple subjects for ONE student.
+            </div>
+            <div class="box box-why">
+                <h3>(WHY) do we use it?</h3>
+                Because writing separate variables for "Math", "Science", and "History" is slow. Arrays let us group data together.
+            </div>
+            <div class="box box-how">
+                <h3>(HOW) did we do it?</h3>
+                Used `marks[]` in HTML to send an array, then used `foreach` in PHP to calculate the total and average.
+                <code>foreach ($marks as $val) { $total += $val; }</code>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: CLASSROOM -->
+        <div class="slide">
+            <span class="icon-chip">Lesson 03</span>
+            <h2>The Full Classroom</h2>
+            <div class="box box-what">
+                <h3>(WHAT) is it?</h3>
+                Processing many students at once using dynamic forms.
+            </div>
+            <div class="box box-why">
+                <h3>(WHY) do we use it?</h3>
+                Real-world apps handle "collections" of data (a class of students, a cart of products).
+            </div>
+            <div class="box box-how">
+                <h3>(HOW) did we do it?</h3>
+                Used JavaScript `appendChild()` to add student blocks and <strong>Nested Loops</strong> to scan through each student's marks.
+            </div>
+        </div>
+
+        <!-- SLIDE 4: MODULARITY -->
+        <div class="slide">
+            <span class="icon-chip">Lesson 04</span>
+            <h2>Modular Functions</h2>
+            <div class="box box-what">
+                <h3>(WHAT) is it?</h3>
+                Moving logic into a special file called `functions.php`.
+            </div>
+            <div class="box box-why">
+                <h3>(WHY) do we use it?</h3>
+                Organization. It keeps your `index.html` clean and lets you reuse the same calculation in multiple projects.
+            </div>
+            <div class="box box-how">
+                <h3>(HOW) did we do it?</h3>
+                Used `include 'functions.php';` and wrote custom functions like `getLetterGrade()`.
+                <code>function getGrade($m) { return ($m >= 75) ? 'A' : 'B'; }</code>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: RANKING -->
+        <div class="slide">
+            <span class="icon-chip">Lesson 05</span>
+            <h2>Ranking & Sorting</h2>
+            <div class="box box-what">
+                <h3>(WHAT) is it?</h3>
+                Sorting the classroom results to find #1, #2, and #3.
+            </div>
+            <div class="box box-why">
+                <h3>(WHY) do we use it?</h3>
+                To turn data into **Information**. Knowing someone got an 80 is good; knowing they are the #1 in class is better!
+            </div>
+            <div class="box box-how">
+                <h3>(HOW) did we do it?</h3>
+                Used `usort()` to sort our student array by their Average score before displaying the table.
+                <code>usort($students, function($a, $b) { return $b['avg'] <=> $a['avg']; });</code>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="tutorial-footer">
+        <button class="btn btn-prev" id="prevBtn" onclick="changeSlide(-1)" disabled>Previous</button>
+        <button class="btn btn-next" id="nextBtn" onclick="changeSlide(1)">Next Lesson &rarr;</button>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const progressBar = document.getElementById('progressBar');
+    const counter = document.getElementById('counter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function changeSlide(dir) {
+        slides[currentSlide].classList.remove('active');
+        currentSlide += dir;
+
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide >= slides.length) {
+            alert("Revision Complete! You are now a PHP Graduation Expert! 🎉");
+            currentSlide = slides.length - 1;
+        }
+
+        slides[currentSlide].classList.add('active');
+        updateUI();
+    }
+
+    function updateUI() {
+        // Update Progress
+        const percent = ((currentSlide + 1) / slides.length) * 100;
+        progressBar.style.width = percent + '%';
+        
+        // Update Counter
+        counter.innerText = `${currentSlide + 1} / ${slides.length}`;
+
+        // Disable/Enable buttons
+        prevBtn.disabled = (currentSlide === 0);
+        
+        if (currentSlide === slides.length - 1) {
+            nextBtn.innerText = "Finish Revision 🎉";
+            nextBtn.style.background = "#34a853";
+        } else {
+            nextBtn.innerText = "Next Lesson →";
+            nextBtn.style.background = "#1a73e8";
+        }
+    }
+</script>
+
+</body>
+</html>
