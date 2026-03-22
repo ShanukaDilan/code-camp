@@ -1,12 +1,11 @@
-<?php
 /**
- * LESSON 03 - NESTED LOOPS & MULTIDIMENSIONAL ARRAYS
+ * LESSON 03 UPDATE - FLEXIBLE CLASSROOM PROCESSING
  * 
- * WHAT: This script processes multiple students, each with their own set of subject marks.
- * WHY: To learn how to navigate nested data structures (a loop inside a loop).
+ * WHAT: This script processes multiple students with a VARIABLE number of subjects.
+ * WHY: To show how nested loops handle data even when we don't know the subject names in advance.
  * HOW:
- *  - Outer Loop: Iterates through each Student.
- *  - Inner Loop: Iterates through each Subject for that specific Student.
+ *  - The frontend now tells us the subject names for each mark.
+ *  - PHP dynamically reads these names and pairs them with scores.
  */
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

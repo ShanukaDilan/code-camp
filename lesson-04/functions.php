@@ -49,4 +49,37 @@ function getGradeColor($grade) {
     ];
     return $colors[$grade] ?? "#333";
 }
+
+/**
+ * WHAT: A function to process a student's full result set.
+ * WHY: This encapsulates the entire grading and calculation logic for high-level reuse.
+ * @param string $name Student Name
+ * @param array $subjects List of subject names
+ * @param array $scores List of corresponding scores
+ * @return array Processed results including total and average
+ */
+function processStudentMarks($name, $subjects, $scores) {
+    $total = 0;
+    $details = [];
+
+    foreach ($subjects as $i => $subj) {
+        $score = intval($scores[$i]);
+        $grade = getLetterGrade($score);
+        $total += $score;
+
+        $details[] = [
+            'subject' => htmlspecialchars($subj),
+            'score' => $score,
+            'grade' => $grade,
+            'color' => getGradeColor($grade)
+        ];
+    }
+
+    return [
+        'name' => htmlspecialchars($name),
+        'results' => $details,
+        'total' => $total,
+        'average' => count($subjects) > 0 ? round($total / count($subjects), 2) : 0
+    ];
+}
 ?>

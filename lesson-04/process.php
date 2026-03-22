@@ -16,8 +16,9 @@ include 'functions.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
+    // 1. DATA COLLECTION
     $names = $_POST['names'];
-    $marksList = $_POST['marks_list']; // This is an array of strings like "75,80,90"
+    $allMarks = $_POST['marks']; // Comes from the dynamic inputs: [student_index][subjects/scores][item_index]
 
     echo "<!DOCTYPE html><html><head><title>Results</title><style>
             body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; padding: 40px; }
@@ -26,29 +27,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </style></head><body>";
     echo "<h1 style='text-align:center;'>Class Result Summary</h1>";
 
-    // 2. STEP: PROCESSING DATA
+// 2. STEP: PROCESSING DATA WITH A CUSTOM FUNCTION
     foreach ($names as $index => $name) {
-        $name = htmlspecialchars($name);
-        
-        // WHAT: Parsing the comma-separated string into an array.
-        // HOW: explode() function splits a string by a delimiter (,).
-        $rawMarks = explode(',', $marksList[$index]);
-        $marks = array_map('intval', $rawMarks); // Force all to integers
+        $subjects = $allMarks[$index]['subjects'];
+        $scores = $allMarks[$index]['scores'];
 
-        // 3. STEP: USING OUR FUNCTIONS
-        // WHY: Look how clean this is! No more messy loops or if-else blocks here.
-        $avg = calculateAverage($marks);
+        // WHAT: Calling our high-level function.
+        // WHY: Look how simple the loop becomes! All calculations happen inside the function.
+        // HOW: results is an array containing: name, results[], total, and average.
+        $studentResult = processStudentMarks($name, $subjects, $scores);
 
         echo "<div class='card'>";
-        echo "<h3>$name</h3>";
-        echo "<p>Marks: " . implode(', ', $marks) . "</p>";
-        echo "<p><strong>Average Score:</strong> $avg</p>";
+        echo "<h3>" . $studentResult['name'] . "</h3>";
+        echo "<p>Total Score: <strong>" . $studentResult['total'] . "</strong> | Average: <strong>" . $studentResult['average'] . "</strong></p>";
         
         echo "<div><strong>Grades: </strong>";
-        foreach ($marks as $m) {
-            $grade = getLetterGrade($m);
-            $color = getGradeColor($grade);
-            echo "<span class='grade-badge' style='background:$color'>$grade</span> ";
+        foreach ($studentResult['results'] as $res) {
+            echo "<span class='grade-badge' style='background:" . $res['color'] . "'>" . $res['subject'] . ": " . $res['grade'] . "</span> ";
         }
         echo "</div></div>";
     }

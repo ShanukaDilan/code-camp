@@ -1,66 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- 
-    WHAT: Multi-Student Input Form (Continued from Lesson 03).
-    WHY: We reuse the same frontend to focus on the Backend Refactoring (Functions).
+    WHAT: Modular Grading System with Dynamic Subjects.
+    WHY: To allow users to define their curriculum while keeping code modular.
 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 04 - Modular Grading System</title>
+    <title>Lesson 04 - Modular Grading (Flexible)</title>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8f9fa; padding: 30px; }
-        .container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .container { max-width: 850px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
         h2 { color: #007bff; text-align: center; }
-        .student-inputs { border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        
+        .section { border: 1px solid #eee; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
+        .section-header { font-weight: bold; color: #007bff; margin-bottom: 15px; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }
+
+        .student-block { background: #fdfdfd; border: 1px dashed #007bff; padding: 15px; margin-bottom: 15px; border-radius: 8px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+
         .form-group { margin-bottom: 10px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
         input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        
         button { padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .btn-primary { background: #007bff; color: white; width: 100%; }
-        .btn-outline { background: transparent; border: 1px solid #007bff; color: #007bff; margin-bottom: 15px; }
+        .btn-primary { background: #007bff; color: white; width: 100%; margin-top: 15px; font-size: 1.1rem; }
+        .btn-outline { background: transparent; border: 1px solid #007bff; color: #007bff; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>Modular Grading System</h2>
-    <p style="text-align: center; color: #666;">Lesson 04: PHP Functions & Include</p>
+    <p style="text-align: center; color: #666;">Lesson 04 Update: Modular Logic for Dynamic Subjects</p>
 
     <form action="process.php" method="POST" id="mainForm">
-        <div id="studentContainer">
-            <div class="student-inputs">
-                <div class="form-group">
-                    <label>Student Name:</label>
-                    <input type="text" name="names[]" required placeholder="Student Name">
+        
+        <!-- STEP 1: SUBJECT DEFINITION -->
+        <div class="section">
+            <div class="section-header">Step 1: Setup Classroom Subjects</div>
+            <div class="form-group" style="display: flex; gap: 10px; align-items: flex-end;">
+                <div style="flex: 1;">
+                    <label>Count:</label>
+                    <input type="number" id="num_subjects" value="3" min="1" max="10">
                 </div>
-                <div class="form-group">
-                    <label>Marks (comma-separated, e.g. 75,60,85):</label>
-                    <input type="text" name="marks_list[]" required placeholder="Comma separated marks">
-                </div>
+                <button type="button" class="btn-outline" onclick="setupSubjects()">Update Subjects</button>
+            </div>
+            <div id="subjectContainer" class="grid">
+                <!-- Names inputs will be generated here -->
             </div>
         </div>
 
-        <button type="button" class="btn-outline" onclick="addStudent()">+ Add Another Student</button>
-        <button type="submit" class="btn-primary">Calculate All Grades</button>
+        <!-- STEP 2: STUDENT MARKS -->
+        <div class="section">
+            <div class="section-header">Step 2: Enter Classroom Results</div>
+            <div id="studentList">
+                <!-- Student cards will be generated here -->
+            </div>
+            <button type="button" class="btn-outline" onclick="addStudent()">+ Add Student</button>
+        </div>
+
+        <button type="submit" class="btn-primary">Generate Modular Report</button>
     </form>
 </div>
 
 <script>
+    let subjects = [];
+    let studentCount = 0;
+
+    window.onload = () => { setupSubjects(); addStudent(); };
+
+    function setupSubjects() {
+        const count = document.getElementById('num_subjects').value;
+        const container = document.getElementById('subjectContainer');
+        container.innerHTML = ''; subjects = [];
+
+        for (let i = 0; i < count; i++) {
+            const name = i === 0 ? 'Math' : (i === 1 ? 'Science' : `Subject ${i+1}`);
+            const div = document.createElement('div');
+            div.innerHTML = `<label>Subj ${i+1}</label> <input type="text" class="subj-name-input" value="${name}" oninput="syncLabels()">`;
+            container.appendChild(div);
+            subjects.push(name);
+        }
+        syncLabels();
+    }
+
+    function syncLabels() {
+        const inputs = document.querySelectorAll('.subj-name-input');
+        subjects = Array.from(inputs).map(inp => inp.value);
+        const labels = document.querySelectorAll('.dynamic-subj-label');
+        labels.forEach((l, i) => { 
+            const sIdx = i % subjects.length; 
+            l.innerText = subjects[sIdx]; 
+            l.nextElementSibling.value = subjects[sIdx]; // update hidden field
+        });
+    }
+
     function addStudent() {
-        const container = document.getElementById('studentContainer');
+        const list = document.getElementById('studentList');
+        const sIdx = studentCount;
         const div = document.createElement('div');
-        div.className = 'student-inputs';
+        div.className = 'student-block';
+        
+        let subHtml = '';
+        subjects.forEach((s, i) => {
+            subHtml += `
+                <div class="form-group">
+                    <label class="dynamic-subj-label">${s}</label>
+                    <input type="hidden" name="marks[${sIdx}][subjects][]" value="${s}">
+                    <input type="number" name="marks[${sIdx}][scores][]" min="0" max="100" required>
+                </div>
+            `;
+        });
+
         div.innerHTML = `
-            <div class="form-group">
-                <label>Student Name:</label>
-                <input type="text" name="names[]" required placeholder="Student Name">
-            </div>
-            <div class="form-group">
-                <label>Marks (comma-separated):</label>
-                <input type="text" name="marks_list[]" required placeholder="Comma separated marks">
-            </div>
+            <h3>Student Card</h3>
+            <div class="form-group"><label>Full Name</label><input type="text" name="names[]" required></div>
+            <div class="grid">${subHtml}</div>
         `;
-        container.appendChild(div);
+        list.appendChild(div);
+        studentCount++;
     }
 </script>
 
