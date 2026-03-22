@@ -21,8 +21,9 @@ To run this project on your local machine, you will need:
 Currently, the project is organized into lessons:
 - **[lesson-01/](./lesson-01/)**: Basic HTML Forms & PHP Grading Logic.
 - **[lesson-02/](./lesson-02/)**: Multi-Subject Grading (Arrays & Loops).
-  - `index.html`: Form for multiple subjects/marks.
-  - `process.php`: Calculates individual grades, total, and average score.
+- **[lesson-03/](./lesson-03/)**: Classroom Grading System (Nested Loops & Dynamic Forms).
+  - `index.html`: Dynamic form to add/remove multiple students.
+  - `process.php`: Nested loops to process results for an entire class.
 
 ---
 
