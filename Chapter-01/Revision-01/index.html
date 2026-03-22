@@ -118,16 +118,20 @@
             <h2>HTML Forms & Basic PHP</h2>
             <div class="box box-what">
                 <h3>(WHAT) is it?</h3>
-                The very first step: Creating a UI for users to enter a student name and their mark, then processing it to find a Grade (A, B, C...).
+                The very first step: Creating a UI for users to enter a student name and their mark.
             </div>
             <div class="box box-why">
                 <h3>(WHY) do we use it?</h3>
-                To learn how the web communicates. Every site (Facebook, Amazon) uses forms to take data and PHP (or similar) to make decisions.
+                To learn how the web communicates data from a browser to a server.
             </div>
             <div class="box box-how">
                 <h3>(HOW) did we do it?</h3>
-                Used `$_POST` to catch data and `if-else` for decision making.
-                <code>&lt;?php <br> if ($mark >= 75) { echo "Grade A"; } <br> ?&gt;</code>
+                We used the <strong>&lt;form&gt;</strong> tag with two critical attributes:
+                <ul>
+                    <li><code>action="process.php"</code>: This is the <strong>Destination</strong>. It tells the browser "When the user clicks submit, send this to process.php".</li>
+                    <li><code>method="POST"</code>: This is the <strong>Delivery Method</strong>. POST hides the data inside the request (secure and invisible to the user).</li>
+                    <li><code>name="mark"</code>: This is the <strong>Label</strong>. PHP uses this label to find the value (<code>$_POST['mark']</code>).</li>
+                </ul>
             </div>
         </div>
 
@@ -137,16 +141,17 @@
             <h2>Loops & Multiple Subjects</h2>
             <div class="box box-what">
                 <h3>(WHAT) is it?</h3>
-                Scaling up to handle multiple subjects for ONE student.
+                Scaling up to handle multiple marks for one student.
             </div>
             <div class="box box-why">
                 <h3>(WHY) do we use it?</h3>
-                Because writing separate variables for "Math", "Science", and "History" is slow. Arrays let us group data together.
+                Because manual processing is slow. Arrays let us treat 5 marks as ONE group.
             </div>
             <div class="box box-how">
                 <h3>(HOW) did we do it?</h3>
-                Used `marks[]` in HTML to send an array, then used `foreach` in PHP to calculate the total and average.
-                <code>foreach ($marks as $val) { $total += $val; }</code>
+                By adding <strong>square brackets []</strong> to the input names: <code>name="marks[]"</code>. 
+                <p>This tells HTML to pack all those inputs into an <strong>Array</strong>. In PHP, we then use a <strong>foreach</strong> loop to "visit" every mark one-by-one to calculate the total.</p>
+                <code>foreach ($marks as $single_mark) { // visits every item }</code>
             </div>
         </div>
 
@@ -160,11 +165,16 @@
             </div>
             <div class="box box-why">
                 <h3>(WHY) do we use it?</h3>
-                Real-world apps handle "collections" of data (a class of students, a cart of products).
+                To build scalable apps. Imagine a teacher entering grades for 40 students in one go.
             </div>
             <div class="box box-how">
                 <h3>(HOW) did we do it?</h3>
-                Used JavaScript `appendChild()` to add student blocks and <strong>Nested Loops</strong> to scan through each student's marks.
+                We used <strong>Nested Arrays</strong>. Each student has their own "box":
+                <ul>
+                    <li><code>marks[0]</code>: Folder for Student 1.</li>
+                    <li><code>marks[1]</code>: Folder for Student 2.</li>
+                </ul>
+                <p>We used <strong>Nested Loops</strong> (a loop inside a loop) — the outer loop picks a student, and the inner loop calculates their marks.</p>
             </div>
         </div>
 
@@ -174,16 +184,16 @@
             <h2>Modular Functions</h2>
             <div class="box box-what">
                 <h3>(WHAT) is it?</h3>
-                Moving logic into a special file called `functions.php`.
+                Moving calculation logic into a special file called `functions.php`.
             </div>
             <div class="box box-why">
                 <h3>(WHY) do we use it?</h3>
-                Organization. It keeps your `index.html` clean and lets you reuse the same calculation in multiple projects.
+                So we don't repeat code. If you want to calculate grades on 10 different pages, you only write the function ONCE.
             </div>
             <div class="box box-how">
                 <h3>(HOW) did we do it?</h3>
-                Used `include 'functions.php';` and wrote custom functions like `getLetterGrade()`.
-                <code>function getGrade($m) { return ($m >= 75) ? 'A' : 'B'; }</code>
+                We used the <strong>include</strong> statement. Think of it as "copy-pasting" all the code from functions.php into your script automatically.
+                <p>Then we called our custom function <code>getLetterGrade($score)</code>, which takes a number and "returns" a letter (A, B, C...).</p>
             </div>
         </div>
 
@@ -193,16 +203,17 @@
             <h2>Ranking & Sorting</h2>
             <div class="box box-what">
                 <h3>(WHAT) is it?</h3>
-                Sorting the classroom results to find #1, #2, and #3.
+                Comparing student averages to award ranks (#1, #2, #3).
             </div>
             <div class="box box-why">
                 <h3>(WHY) do we use it?</h3>
-                To turn data into **Information**. Knowing someone got an 80 is good; knowing they are the #1 in class is better!
+                To provide insight into classroom performance and top-scorers.
             </div>
             <div class="box box-how">
                 <h3>(HOW) did we do it?</h3>
-                Used `usort()` to sort our student array by their Average score before displaying the table.
-                <code>usort($students, function($a, $b) { return $b['avg'] <=> $a['avg']; });</code>
+                We used the <strong>usort()</strong> function. 
+                <p>It's like telling PHP: "Hey, here is a list of students. Use this special rule (Compare Average B to Average A) to put the smartest student at the top of the list."</p>
+                <code>// Comparison rule: Highest Average first <br> return ($b['avg'] > $a['avg']) ? 1 : -1;</code>
             </div>
         </div>
 
