@@ -24,13 +24,23 @@ function getLetterGrade($mark) {
  */
 function processStudentMarks($name, $subjects, $scores) {
     $total = 0;
-    foreach ($scores as $s) { $total += intval($s); }
+    $details = [];
+    foreach ($scores as $i => $s) { 
+        $score = intval($s);
+        $total += $score;
+        $details[] = [
+            'subject' => htmlspecialchars($subjects[$i]),
+            'score' => $score,
+            'grade' => getLetterGrade($score)
+        ];
+    }
     $avg = count($subjects) > 0 ? $total / count($subjects) : 0;
 
     return [
         'name' => htmlspecialchars($name),
         'total' => $total,
-        'average' => round($avg, 2)
+        'average' => round($avg, 2),
+        'details' => $details
     ];
 }
 

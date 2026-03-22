@@ -50,13 +50,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "<div class='leaderboard'>";
     echo "<h1>🏆 Classroom Leaderboard</h1>";
     echo "<table>";
-    echo "<tr><th>Rank</th><th>Student Name</th><th>Total Marks</th><th>Average</th></tr>";
+    echo "<tr><th>Rank</th><th>Student Name</th><th>Subject Grades</th><th>Total Marks</th><th>Average</th></tr>";
 
     foreach ($studentTable as $student) {
         $rankClass = ($student['rank'] <= 3) ? "rank-" . $student['rank'] : "";
+        
+        // WHAT: Displaying subject details.
+        // HOW: Looping through the 'details' array for each student.
+        $detailsHtml = "";
+        foreach ($student['details'] as $d) {
+            $detailsHtml .= "<div style='font-size: 0.85rem;'>" . $d['subject'] . ": <strong>" . $d['grade'] . "</strong></div>";
+        }
+
         echo "<tr class='$rankClass'>";
         echo "<td><span class='rank-val'>#" . $student['rank'] . "</span></td>";
         echo "<td>" . $student['name'] . "</td>";
+        echo "<td>" . $detailsHtml . "</td>";
         echo "<td>" . $student['total'] . "</td>";
         echo "<td>" . $student['average'] . "</td>";
         echo "</tr>";
