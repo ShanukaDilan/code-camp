@@ -24,6 +24,10 @@ Currently, the project is organized into lessons:
 - **[lesson-03/](./lesson-03/)**: Classroom Grading System (Nested Loops & Dynamic Forms).
   - `index.html`: Dynamic form to add/remove multiple students.
   - `process.php`: Nested loops to process results for an entire class.
+- **[lesson-04/](./lesson-04/)**: Modular Grading System (Functions & Includes).
+  - `functions.php`: Reusable functions for grading and calculations.
+  - `index.html`: Input form with comma-separated mark parsing.
+  - `process.php`: Modular backend using `include` to call external functions.
 
 ---
 
