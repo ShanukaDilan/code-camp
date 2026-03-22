@@ -1,23 +1,26 @@
-# code-camp 🎓
+# 🏕️ code-camp 🎓
+Welcome to the **code-camp** project! This is an educational repository designed to help students learn web development step-by-step, from basic HTML/PHP to advanced ranking systems.
 
-Welcome to the **code-camp** project! This is an educational repository designed to help students learn web development step-by-step, from basic HTML/PHP to advanced full-stack systems.
+---
 
-## Prerequisites
-To run this project on your local machine, you will need:
-1. **Git:** To clone and pull updates.
-2. **Local Web Server:** Install [XAMPP](https://www.apachefriends.org/), WAMP, or MAMP to run PHP.
-3. **Code Editor:** VS Code is highly recommended.
+## 💡 Learning Methodology: (WHAT), (WHY), (HOW)
+Every lesson in this camp follows a structured tutoring style to ensure deep understanding:
+- **(WHAT)**: A clear description of the component or logic being built.
+- **(WHY)**: The educational context and real-world reason for using this specific tool.
+- **(HOW)**: The technical implementation details and step-by-step code breakdown.
 
-## How to Install and Run Locally
-1. **Start your local server:** Open XAMPP and start the **Apache** module.
-2. **Navigate to the web root:** - Windows: Go to `C:\xampp\htdocs`
-   - Mac: Go to `/Applications/MAMP/htdocs`
-3. **Clone the repository:** Open your terminal or command prompt in that folder and run:
-   ```bash
-   git clone [https://github.com/ShanukaDilan/code-camp.git](https://github.com/ShanukaDilan/code-camp.git)
+---
 
-# 🏕️ Code-Camp Project
-A step-by-step educational project for learning modern Web Development with PHP.
+## 🛠️ Getting Started
+### 1. Prerequisites
+- **Local Web Server:** [XAMPP](https://www.apachefriends.org/), WAMP, or MAMP.
+- **Git:** To clone and pull updates.
+- **VS Code:** Recommended editor.
+
+### 2. Installation
+1. Start **Apache** in your XAMPP/WAMP control panel.
+2. Navigate to your web root (`htdocs` or `www`).
+3. Run: `git clone https://github.com/ShanukaDilan/code-camp.git`
 
 ---
 
