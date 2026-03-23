@@ -1,0 +1,34 @@
+---
+import { getEntry } from 'astro:content';
+import InteractivePlayground from '../../../components/InteractivePlayground.tsx';
+
+// Opt out of prerendering so changes reflect instantly when the page loads
+export const prerender = false; 
+
+const { chapter, lesson } = Astro.params;
+
+// Find matching lesson
+const lessonEntry = await getEntry('lessons', `${chapter}/${lesson}`);
+
+if (!lessonEntry) {
+  return Astro.redirect('/404');
+}
+
+const { Content } = await lessonEntry.render();
+---
+
+<html lang="en">
+  <head>
+    <title>{lessonEntry.data.title}</title>
+  </head>
+  <body>
+    <main style="max-width: 800px; margin: 0 auto; padding: 2rem; font-family: sans-serif;">
+      <h1>{lessonEntry.data.title}</h1>
+      <article style="line-height: 1.6;">
+        <Content />
+      </article>
+      
+      <InteractivePlayground client:only="react" initialHtml="<h1>Hello Class</h1>" />
+    </main>
+  </body>
+</html>
